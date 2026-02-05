@@ -1,0 +1,94 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+
+/* =========================================================
+   Custom Theme Additions
+   ========================================================= */
+
+:root{
+  --brand: #0d6efd;       /* Bootstrap primary default */
+  --brand-2: #0b5ed7;     /* slightly darker */
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-feature-settings: "cv02","cv03","cv04","cv11";
+}
+
+/* Hero */
+.hero {
+  background: radial-gradient(1200px circle at 10% 10%, rgba(13,110,253,.15), transparent 40%),
+              radial-gradient(900px circle at 90% 20%, rgba(25,135,84,.12), transparent 40%),
+              linear-gradient(180deg, #0b1220 0%, #0b1220 65%, #0f172a 100%);
+  color: #fff;
+}
+.hero .lead { color: rgba(255,255,255,.8); }
+
+
+/* Simple “glass” cards for dark hero section */
+.hero-card {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(8px);
+}
+
+/* Section headings */
+.section-title {
+  letter-spacing: -.02em;
+}
+
+/* Service icon badge */
+.icon-badge {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(13,110,253,.1);
+}
+
+/* Subtle hover lift */
+.hover-lift {
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(2, 8, 23, .10);
+}
+
+/* Footer */
+.site-footer a { text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
