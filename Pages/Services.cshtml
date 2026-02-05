@@ -1,0 +1,128 @@
+﻿@page
+@model ITWebsite.Pages.ServicesModel
+@{
+}
+
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-end mb-4">
+      <div class="col-lg-8">
+        <h1 class="fw-bold section-title mb-2">Services</h1>
+        <p class="text-secondary mb-0">
+          Practical IT help for home users and small businesses.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+        <a class="btn btn-primary" asp-page="/Contact">
+          Request help <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-lift">
+          <div class="card-body">
+            <div class="icon-badge mb-3"><i class="bi bi-laptop fs-5"></i></div>
+            <h5 class="fw-semibold">PC / Laptop Repair</h5>
+            <ul class="text-secondary mb-0">
+              <li>Diagnostics & troubleshooting</li>
+              <li>OS reinstall / recovery</li>
+              <li>SSD/RAM upgrades</li>
+              <li>Driver / update issues</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-lift">
+          <div class="card-body">
+            <div class="icon-badge mb-3"><i class="bi bi-router fs-5"></i></div>
+            <h5 class="fw-semibold">Networking</h5>
+            <ul class="text-secondary mb-0">
+              <li>Wi-Fi coverage & performance</li>
+              <li>Router setup / replacement</li>
+              <li>Printer troubleshooting</li>
+              <li>Basic cabling & layout</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-lift">
+          <div class="card-body">
+            <div class="icon-badge mb-3"><i class="bi bi-cloud-check fs-5"></i></div>
+            <h5 class="fw-semibold">Microsoft 365</h5>
+            <ul class="text-secondary mb-0">
+              <li>Domain email setup</li>
+              <li>MFA enablement</li>
+              <li>User/device onboarding</li>
+              <li>OneDrive/SharePoint basics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-lift">
+          <div class="card-body">
+            <div class="icon-badge mb-3"><i class="bi bi-shield-lock fs-5"></i></div>
+            <h5 class="fw-semibold">Security Basics</h5>
+            <ul class="text-secondary mb-0">
+              <li>Password manager setup</li>
+              <li>Backups & recovery plan</li>
+              <li>Safer defaults</li>
+              <li>Security awareness check</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-lift">
+          <div class="card-body">
+            <div class="icon-badge mb-3"><i class="bi bi-briefcase fs-5"></i></div>
+            <h5 class="fw-semibold">Small Business Support</h5>
+            <ul class="text-secondary mb-0">
+              <li>New PC setup & migration</li>
+              <li>Basic documentation</li>
+              <li>Remote support</li>
+              <li>Light monthly maintenance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-lift">
+          <div class="card-body">
+            <div class="icon-badge mb-3"><i class="bi bi-hdd-stack fs-5"></i></div>
+            <h5 class="fw-semibold">Backup & Data</h5>
+            <ul class="text-secondary mb-0">
+              <li>Backup setup</li>
+              <li>Restore testing</li>
+              <li>Drive cloning (as appropriate)</li>
+              <li>Data organization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 p-4 rounded-4 border bg-light">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-8">
+          <h4 class="fw-semibold mb-1">Not sure what you need?</h4>
+          <p class="text-secondary mb-0">Describe the issue — I’ll suggest the simplest fix.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a class="btn btn-primary btn-lg w-100 w-lg-auto" asp-page="/Contact">
+            Contact me <i class="bi bi-envelope ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

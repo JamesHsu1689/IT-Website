@@ -1,0 +1,186 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="hero py-5">
+  <div class="container py-4">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <p class="text-uppercase small mb-2 opacity-75">
+          Local IT support • Remote & On-site
+        </p>
+        <h1 class="display-5 fw-bold mb-3">
+          Reliable IT support for home & small business
+        </h1>
+        <p class="lead mb-4">
+          Fast troubleshooting, upgrades, Microsoft 365 setup, and security basics —
+          clear pricing, no nonsense, and friendly support.
+        </p>
+
+        <div class="d-flex flex-column flex-sm-row gap-2">
+          <a class="btn btn-primary btn-lg" asp-page="/Contact">
+            Get a quote <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+          <a class="btn btn-outline-light btn-lg" asp-page="/Services">
+            View services
+          </a>
+        </div>
+
+        <div class="mt-4 d-flex flex-wrap gap-3 small opacity-75">
+          <span><i class="bi bi-check2-circle me-1"></i>BCIT CST grad</span>
+          <span><i class="bi bi-check2-circle me-1"></i>AZ-900 • SC-900 • A+</span>
+          <span><i class="bi bi-check2-circle me-1"></i>MSP experience</span>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="p-4 rounded-4 hero-card">
+          <h5 class="fw-semibold mb-3">Popular quick fixes</h5>
+
+          <div class="d-flex gap-3 mb-3">
+            <div class="icon-badge"><i class="bi bi-laptop fs-5"></i></div>
+            <div>
+              <div class="fw-semibold">PC cleanup & tune-up</div>
+              <div class="small opacity-75">Slow PC? Popups? Startup issues?</div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3 mb-3">
+            <div class="icon-badge"><i class="bi bi-hdd-network fs-5"></i></div>
+            <div>
+              <div class="fw-semibold">Wi-Fi & network troubleshooting</div>
+              <div class="small opacity-75">Coverage, disconnects, printer issues</div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3">
+            <div class="icon-badge"><i class="bi bi-cloud-check fs-5"></i></div>
+            <div>
+              <div class="fw-semibold">Microsoft 365 setup</div>
+              <div class="small opacity-75">Email, MFA, accounts, OneDrive</div>
+            </div>
+          </div>
+
+          <hr class="border-secondary my-4" />
+
+          <div class="d-grid">
+            <a class="btn btn-success btn-lg" asp-page="/Contact">
+              Book a time <i class="bi bi-calendar2-week ms-1"></i>
+            </a>
+          </div>
+
+          <div class="small opacity-75 mt-3">
+            Evenings & weekends available.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-end mb-4">
+      <div class="col-lg-8">
+        <h2 class="section-title fw-bold mb-2">Services</h2>
+        <p class="text-secondary mb-0">
+          Clear, practical help — remote when possible, on-site when needed.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+        <a class="btn btn-outline-primary" asp-page="/Services">See all services</a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-lift">
+          <div class="card-body">
+            <div class="icon-badge mb-3"><i class="bi bi-wrench-adjustable fs-5"></i></div>
+            <h5 class="card-title fw-semibold">PC & laptop repair</h5>
+            <p class="card-text text-secondary">
+              Diagnostics, OS reinstall, performance fixes, SSD/RAM upgrades, and hardware troubleshooting.
+            </p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pt-0">
+            <a asp-page="/Contact" class="btn btn-sm btn-primary">Request help</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-lift">
+          <div class="card-body">
+            <div class="icon-badge mb-3"><i class="bi bi-router fs-5"></i></div>
+            <h5 class="card-title fw-semibold">Home & small office networking</h5>
+            <p class="card-text text-secondary">
+              Wi-Fi coverage, router setup, printer issues, cabling basics, and simple network cleanups.
+            </p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pt-0">
+            <a asp-page="/Contact" class="btn btn-sm btn-primary">Request help</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 hover-lift">
+          <div class="card-body">
+            <div class="icon-badge mb-3"><i class="bi bi-shield-lock fs-5"></i></div>
+            <h5 class="card-title fw-semibold">Security basics</h5>
+            <p class="card-text text-secondary">
+              MFA, password manager setup, endpoint hygiene, backups, and safer default configurations.
+            </p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pt-0">
+            <a asp-page="/Contact" class="btn btn-sm btn-primary">Request help</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-7">
+        <h2 class="section-title fw-bold mb-2">Why work with me</h2>
+        <p class="text-secondary mb-4">
+          You get honest troubleshooting, clear communication, and documentation so you’re not stuck later.
+        </p>
+        <ul class="list-unstyled mb-0">
+          <li class="d-flex gap-2 mb-2">
+            <i class="bi bi-check2-circle text-success"></i>
+            <span><strong>7 years</strong> electronics repair & manufacturing experience</span>
+          </li>
+          <li class="d-flex gap-2 mb-2">
+            <i class="bi bi-check2-circle text-success"></i>
+            <span><strong>BCIT CST</strong> graduate + Microsoft fundamentals certs</span>
+          </li>
+          <li class="d-flex gap-2">
+            <i class="bi bi-check2-circle text-success"></i>
+            <span><strong>MSP workflow mindset</strong>: ticket notes, follow-ups, and best practices</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="p-4 bg-white rounded-4 border hover-lift">
+          <h5 class="fw-semibold mb-2">Want a quick estimate?</h5>
+          <p class="text-secondary mb-3">
+            Tell me what you need. I’ll reply with next steps and a rough cost.
+          </p>
+          <a class="btn btn-primary w-100" asp-page="/Contact">
+            Contact me <i class="bi bi-envelope ms-1"></i>
+          </a>
+          <div class="small text-secondary mt-3">
+            Typical response time: same day (evenings/weekends).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

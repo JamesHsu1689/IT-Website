@@ -1,0 +1,89 @@
+﻿@page
+@model ITWebsite.Pages.ContactModel
+@{
+}
+
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <h1 class="fw-bold section-title mb-2">Contact</h1>
+        <p class="text-secondary mb-4">
+          Tell me what you need help with. I’ll reply with next steps and an estimate.
+        </p>
+
+        <div class="d-flex gap-3 mb-3">
+          <div class="icon-badge"><i class="bi bi-clock fs-5"></i></div>
+          <div>
+            <div class="fw-semibold">Availability</div>
+            <div class="text-secondary">Evenings & weekends</div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-3 mb-3">
+          <div class="icon-badge"><i class="bi bi-geo-alt fs-5"></i></div>
+          <div>
+            <div class="fw-semibold">Service area</div>
+            <div class="text-secondary">Remote + local on-site</div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-3">
+          <div class="icon-badge"><i class="bi bi-shield-check fs-5"></i></div>
+          <div>
+            <div class="fw-semibold">What to expect</div>
+            <div class="text-secondary">Clear communication, documentation, and honest pricing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card hover-lift">
+          <div class="card-body p-4">
+            <h4 class="fw-semibold mb-3">Request help</h4>
+
+            <form>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Name</label>
+                  <input class="form-control" placeholder="Your name" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input class="form-control" placeholder="name@email.com" />
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">What do you need help with?</label>
+                  <textarea class="form-control" rows="5"
+                    placeholder="Example: laptop running slow, need SSD upgrade, Microsoft 365 email setup, Wi-Fi dropping, etc."></textarea>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">Preferred contact method</label>
+                  <select class="form-select">
+                    <option>Email</option>
+                    <option>Phone call</option>
+                    <option>Text</option>
+                  </select>
+                </div>
+
+                <div class="col-12 d-grid">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    Send request <i class="bi bi-send ms-1"></i>
+                  </button>
+                </div>
+
+                <div class="small text-secondary">
+                  By submitting, you agree to be contacted about this request. No spam.
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
