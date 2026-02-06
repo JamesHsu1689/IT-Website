@@ -1,5 +1,5 @@
-using System.Net;
-using System.Net.Mail;
+using Azure;
+using Azure.Communication.Email;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -29,55 +29,53 @@ public class ContactModel : PageModel
         }
         catch (Exception ex)
         {
-            // Optional: add a friendly error
             ModelState.AddModelError("", $"Email failed: {ex.Message}");
         }
 
         return Page();
     }
 
-
-    /* 
-    Currently not working. Catch message:
-
-    Email failed: The SMTP server requires a secure connection or the client was not authenticated. 
-    The server response was: 5.7.57 Client not authenticated to send mail. 
-    Error: 535 5.7.139 Authentication unsuccessful, SmtpClientAuthentication is disabled for the Mailbox. 
-    Visit https://aka.ms/smtp_auth_disabled for more information. 
-    // [MW4P223CA0015.NAMP223.PROD.OUTLOOK.COM 2026-02-06T00:38:24.198Z 08DE64628E67C48C]
-    
-     */
     private async Task SendEmailAsync()
     {
-        var smtpServer = _config["EmailSettings:SmtpServer"];
-        var username   = _config["EmailSettings:Username"];
-        var password   = _config["EmailSettings:Password"];
-        var toEmail    = _config["EmailSettings:ToEmail"] ?? username;
-        var port       = int.Parse(_config["EmailSettings:Port"] ?? "587");
+        var conn = _config["EmailSettings:AcsConnectionString"]
+                ?? throw new InvalidOperationException("Missing EmailSettings__AcsConnectionString");
 
-        using var smtp = new SmtpClient(smtpServer, port)
+        var from = _config["EmailSettings:FromEmail"]
+                ?? throw new InvalidOperationException("Missing EmailSettings__FromEmail");
+
+        var to = _config["EmailSettings:ToEmail"]
+                ?? throw new InvalidOperationException("Missing EmailSettings__ToEmail");
+
+        var client = new EmailClient(conn);
+
+        var subject = "New Support Request";
+
+        var body =
+    $"""
+    Name: {Name}
+    Email: {Email}
+    Preferred Contact: {ContactMethod}
+
+    Message:
+    {Message}
+    """;
+
+        var content = new EmailContent(subject)
         {
-            EnableSsl = true, // STARTTLS on 587
-            Credentials = new NetworkCredential(username, password)
+            PlainText = body
         };
 
-        using var mail = new MailMessage
+        var message = new EmailMessage(
+            senderAddress: from,
+            recipientAddress: to,
+            content: content
+        );
+
+        var result = await client.SendAsync(WaitUntil.Completed, message);
+
+        if (result.HasValue && result.Value.Status != EmailSendStatus.Succeeded)
         {
-            From = new MailAddress(username),
-            Subject = "New Support Request",
-            Body =
-$"""
-Name: {Name}
-Email: {Email}
-Preferred Contact: {ContactMethod}
-
-Message:
-{Message}
-"""
-        };
-
-        mail.To.Add(toEmail);
-
-        await smtp.SendMailAsync(mail);
+            throw new InvalidOperationException($"ACS send failed. Status={result.Value.Status}");
+        }
     }
 }
