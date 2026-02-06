@@ -42,44 +42,51 @@
         <div class="card hover-lift">
           <div class="card-body p-4">
             <h4 class="fw-semibold mb-3">Request help</h4>
+            
+            <form method="post">
+                <div class="row g-3">
 
-            <form>
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label">Name</label>
-                  <input class="form-control" placeholder="Your name" />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Email</label>
-                  <input class="form-control" placeholder="name@email.com" />
-                </div>
+                    <div class="col-md-6">                    
+                    <label class="form-label">Name</label>
+                    <input class="form-control" name="Name" placeholder="Your name" />
+                    </div>
 
-                <div class="col-12">
-                  <label class="form-label">What do you need help with?</label>
-                  <textarea class="form-control" rows="5"
-                    placeholder="Example: laptop running slow, need SSD upgrade, Microsoft 365 email setup, Wi-Fi dropping, etc."></textarea>
-                </div>
+                    <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input class="form-control" name="Email" placeholder="name@email.com" />
+                    </div>
 
-                <div class="col-12">
-                  <label class="form-label">Preferred contact method</label>
-                  <select class="form-select">
-                    <option>Email</option>
-                    <option>Phone call</option>
-                    <option>Text</option>
-                  </select>
-                </div>
+                    <div class="col-12">
+                    <label class="form-label">What do you need help with?</label>
+                    <textarea class="form-control" name="Message" rows="5"></textarea>
+                    </div>
 
-                <div class="col-12 d-grid">
-                  <button type="submit" class="btn btn-primary btn-lg">
-                    Send request <i class="bi bi-send ms-1"></i>
-                  </button>
-                </div>
+                    <div class="col-12">
+                    <label class="form-label">Preferred contact method</label>
+                    <select class="form-select" name="ContactMethod">
+                        <option>Email</option>
+                        <option>Phone call</option>
+                        <option>Text</option>
+                    </select>
+                    </div>
 
-                <div class="small text-secondary">
-                  By submitting, you agree to be contacted about this request. No spam.
+                    <div class="col-12 d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Send request
+                    </button>
+                    </div>
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    @if (Model.Sent)
+                    {
+                    <div class="alert alert-success mt-3">
+                        Your request has been sent. We’ll be in touch shortly.
+                    </div>
+                    }
+
                 </div>
-              </div>
-            </form>
+                </form>
 
           </div>
         </div>
