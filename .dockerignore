@@ -1,0 +1,25 @@
+# Build outputs
+bin/
+obj/
+
+# User/editor files
+.vscode/
+.vs/
+*.user
+*.suo
+
+# Git
+.git/
+.gitignore
+
+# OS / misc
+.DS_Store
+Thumbs.db
+
+# Docker / env
+.env
+.env.*
+docker-compose.override.yml
+
+# Docs / misc (optional)
+*.md

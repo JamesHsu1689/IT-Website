@@ -1,0 +1,22 @@
+services:
+  itwebsite:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: itwebsite-local
+    ports:
+      - "5125:8080"
+    environment:
+      # Make the app run in Development so it doesn't enable HSTS.
+      # (Your Program.cs only enables HSTS when NOT Development.)
+      ASPNETCORE_ENVIRONMENT: Development
+
+      # Keep the same binding as Dockerfile; explicit here is fine too.
+      ASPNETCORE_URLS: http://0.0.0.0:8080
+
+      # Required by your Contact page code (IConfiguration keys)
+      EmailSettings__AcsConnectionString: ${EmailSettings__AcsConnectionString}
+      EmailSettings__FromEmail: ${EmailSettings__FromEmail}
+      EmailSettings__ToEmail: ${EmailSettings__ToEmail}
+    env_file:
+      - .env
