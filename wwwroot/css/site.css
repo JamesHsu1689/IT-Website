@@ -12,14 +12,13 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+  height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
-  padding-top: 64px; /* match your navbar height */
+  padding-top: 64px; /* keep for fixed-top navbar */
+  margin: 0;         /* remove template margin-bottom trick */
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
