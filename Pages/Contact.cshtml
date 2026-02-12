@@ -47,27 +47,41 @@
                 <div class="row g-3">
 
                     <div class="col-md-6">                    
-                    <label class="form-label">Name</label>
-                    <input class="form-control" name="Name" placeholder="Your name" />
+                      <label class="form-label">Name</label>
+                      <input class="form-control" name="Name" id="nameInput" placeholder="Your name" />
+                      <span class="text-danger" asp-validation-for="Name"></span>
                     </div>
 
-                    <div class="col-md-6">
-                    <label class="form-label">Email</label>
-                    <input class="form-control" name="Email" placeholder="name@email.com" />
+                    <div class="col-md-6" id="emailField">
+                      <label class="form-label">Email</label>
+                      <input class="form-control" name="Email" id="emailInput" placeholder="name@email.com" />
+                      <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+
+                    <div class="col-12 d-none" id="phoneField">
+                        <label class="form-label">Phone Number</label>
+                        <input class="form-control" 
+                              name="PhoneNumber" 
+                              id="phoneInput"
+                              placeholder="(403) 123-4567" />
+                        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
                     </div>
 
                     <div class="col-12">
-                    <label class="form-label">What do you need help with?</label>
-                    <textarea class="form-control" name="Message" rows="5"></textarea>
+                      <label class="form-label">What do you need help with?</label>
+                      <textarea class="form-control" name="Message" id="messageInput" rows="5"></textarea>
+                      <span class="text-danger" asp-validation-for="Message"></span>
                     </div>
 
                     <div class="col-12">
-                    <label class="form-label">Preferred contact method</label>
-                    <select class="form-select" name="ContactMethod">
-                        <option>Email</option>
-                        <option>Phone call</option>
-                        <option>Text</option>
-                    </select>
+                      <label class="form-label">Preferred contact method</label>
+                      <select class="form-select" name="ContactMethod" id="contactMethod">                          
+                          <option value="Email">Email</option>
+                          <option value="Phone call">Phone call</option>
+                          <option value="Text">Text</option>          
+                          <option value="Any">Any</option>             
+                      </select>
+                      <span class="text-danger" asp-validation-for="ContactMethod"></span>
                     </div>
 
                     <div class="col-12 d-grid">
@@ -92,18 +106,88 @@
                 </form>
 
                 <script>
-                document.querySelector("form").addEventListener("submit", function () {
+                  const form = document.querySelector("form");
 
-                    const btn = document.getElementById("submitBtn");
-                    const text = document.getElementById("btnText");
-                    const spinner = document.getElementById("spinner");
+                  const contactSelect = document.getElementById("contactMethod");
+                  const phoneField = document.getElementById("phoneField");
+                  const emailField = document.getElementById("emailField");
 
-                    btn.disabled = true;
-                    btn.classList.add("opacity-75");
-                    text.innerText = "Sending...";
+                  const nameInput = document.getElementById("nameInput");
+                  const messageInput = document.getElementById("messageInput");
+
+                  const emailInput = document.getElementById("emailInput");
+                  const phoneInput = document.getElementById("phoneInput");
+
+                  const submitBtn = document.getElementById("submitBtn");
+                  const btnText = document.getElementById("btnText");
+                  const spinner = document.getElementById("spinner");
+
+                  function applyRequirements() {
+                    const method = contactSelect.value;
+                    const isEmail = method === "Email";
+                    const isPhoneOrText = (method === "Phone call" || method === "Text");
+                    const isAny = method === "Any";
+
+                    nameInput.required = true;
+                    messageInput.required = true;
+
+                    if (isAny) {
+                      emailField.classList.remove("d-none");
+                      phoneField.classList.remove("d-none");
+
+                      emailInput.disabled = false;
+                      phoneInput.disabled = false;
+
+                      emailInput.required = true;
+                      phoneInput.required = true;
+                      return;
+                    }
+
+                    if (isEmail) {
+                      emailField.classList.remove("d-none");
+                      phoneField.classList.add("d-none");
+
+                      emailInput.disabled = false;
+                      emailInput.required = true;
+
+                      phoneInput.disabled = true;
+                      phoneInput.required = false;
+                      phoneInput.removeAttribute("required");
+                      return;
+                    }
+
+                    if (isPhoneOrText) {
+                      emailField.classList.add("d-none");
+                      phoneField.classList.remove("d-none");
+
+                      emailInput.disabled = true;
+                      emailInput.required = false;
+                      emailInput.removeAttribute("required");
+
+                      phoneInput.disabled = false;
+                      phoneInput.required = true;
+                      return;
+                    }
+                  }
+
+                  contactSelect.addEventListener("change", applyRequirements);
+                  applyRequirements();
+
+                  form.addEventListener("submit", function () {
+
+                    // Re-apply rules before validation
+                    applyRequirements();
+
+                    // If browser validation fails, do NOT show spinner
+                    if (!form.checkValidity()) return;
+
+                    // Disable button + show spinner
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add("opacity-75");
+
+                    btnText.innerText = "Sending...";
                     spinner.classList.remove("d-none");
-
-                });
+                  });
                 </script>
 
           </div>
