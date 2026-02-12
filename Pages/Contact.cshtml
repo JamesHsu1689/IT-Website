@@ -71,8 +71,11 @@
                     </div>
 
                     <div class="col-12 d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        Send request
+                    <button type="submit" 
+                            id="submitBtn"
+                            class="btn btn-primary btn-lg">
+                        <span id="btnText">Send request</span>
+                        <span id="spinner" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                     </button>
                     </div>
 
@@ -87,6 +90,21 @@
 
                 </div>
                 </form>
+
+                <script>
+                document.querySelector("form").addEventListener("submit", function () {
+
+                    const btn = document.getElementById("submitBtn");
+                    const text = document.getElementById("btnText");
+                    const spinner = document.getElementById("spinner");
+
+                    btn.disabled = true;
+                    btn.classList.add("opacity-75");
+                    text.innerText = "Sending...";
+                    spinner.classList.remove("d-none");
+
+                });
+                </script>
 
           </div>
         </div>

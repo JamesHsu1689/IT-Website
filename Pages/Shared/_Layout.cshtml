@@ -14,10 +14,13 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary site-navbar fixed-top">
             <div class="container">
-            <a class="navbar-brand fw-semibold" asp-page="/Index">
-                <i class="bi bi-shield-check me-2"></i>YourBrand IT
+            <a class="navbar-brand d-flex align-items-center" asp-page="/Index">
+                <img src="~/images/logo.png" alt="Kairos Logo" class="me-3" />
+                <span class="fw-semibold fs-5">
+                    Kairos Technologies
+                </span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
@@ -38,8 +41,8 @@
             </div>
             </div>
         </nav>
-        </header>
-    <div class=container-fluid"">
+    </header>
+    <div class=container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -49,14 +52,14 @@
         <div class="container">
             <div class="row g-3 align-items-center">
             <div class="col-md-6">
-                <div class="fw-semibold text-white">YourBrand IT</div>
+                <div class="fw-semibold text-white">Kairos Technologies</div>
                 <div class="small">Reliable IT support • Remote & On-site</div>
             </div>
             <div class="col-md-6 text-md-end small">
                 <a class="text-white-50 me-3" asp-page="/Services">Services</a>
                 <a class="text-white-50 me-3" asp-page="/About">About</a>
                 <a class="text-white-50" asp-page="/Contact">Contact</a>
-                <div class="mt-2">© @DateTime.UtcNow.Year YourBrand IT</div>
+                <div class="mt-2">© @DateTime.UtcNow.Year Kairos Technologies</div>
             </div>
             </div>
         </div>

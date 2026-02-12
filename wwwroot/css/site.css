@@ -19,6 +19,7 @@ html {
 
 body {
   margin-bottom: 60px;
+  padding-top: 64px; /* match your navbar height */
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -92,3 +93,75 @@ body {
 .site-footer a { text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
 
+
+/* --- Navbar brand sizing (Kairos) --- */
+.site-navbar {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 64px;
+  z-index: 1030; /* stays above content */
+}
+
+.site-navbar .container {
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+.site-navbar.nav-scrolled .container {
+  height: 58px;
+}
+
+.site-navbar .navbar-brand {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  height: 64px;                  /* aligns brand content nicely */
+}
+
+.site-navbar .navbar-brand img {
+  height: 60px;                  /* try 64px if you want max */
+  width: auto;
+  display: block;                /* removes inline image baseline gap */
+}
+
+
+
+
+/* Navbar transition */
+/* Smooth transition */
+.site-navbar {
+  transition: all 0.25s ease;
+}
+
+/* Default (top of page) */
+.site-navbar {
+  min-height: 64px;
+}
+
+.site-navbar .navbar-brand {
+  height: 64px;
+  transition: all 0.25s ease;
+}
+
+.site-navbar .navbar-brand img {
+  height: 60px;
+  transition: all 0.25s ease;
+}
+
+/* When scrolled */
+.site-navbar.nav-scrolled {
+  min-height: 58px; /* 6px thinner */
+  box-shadow: 0 4px 20px rgba(0,0,0,.25); /* subtle premium depth */
+  backdrop-filter: blur(6px);
+  background-color: rgba(33, 37, 41, 0.95) !important;
+}
+
+.site-navbar.nav-scrolled .navbar-brand {
+  height: 58px;
+}
+
+.site-navbar.nav-scrolled .navbar-brand img {
+  height: 54px;
+}
