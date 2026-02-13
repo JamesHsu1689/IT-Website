@@ -21,7 +21,21 @@ builder.Services.AddRateLimiter(options =>
     {
         // Uses the app's view of the client IP.
         // (We’ll also add Host gating so direct Render-origin spam is less likely.)
-        var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+        //var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+        // When behind proxies, use CF-Connecting-IP or X-Forwarded-For to get the real client IP for rate limiting
+        // var cfIp = context.Request.Headers["CF-Connecting-IP"].ToString();
+        // var ip = !string.IsNullOrWhiteSpace(cfIp)
+        //     ? cfIp
+        //     : (context.Connection.RemoteIpAddress?.ToString() ?? "unknown");
+
+        // More robust approach: check for Cloudflare header but fall back to RemoteIp if missing (e.g. if CF is only on certain routes or during development)
+        var cfRay = context.Request.Headers["CF-RAY"].ToString();
+        var cfConnectingIp = context.Request.Headers["CF-Connecting-IP"].ToString();
+
+        var ip = (!string.IsNullOrWhiteSpace(cfRay) && !string.IsNullOrWhiteSpace(cfConnectingIp))
+            ? cfConnectingIp
+            : (context.Connection.RemoteIpAddress?.ToString() ?? "unknown");
 
         // Token bucket: allow small bursts but not sustained spam
         return RateLimitPartition.GetTokenBucketLimiter(ip, _ => new TokenBucketRateLimiterOptions
@@ -39,16 +53,21 @@ builder.Services.AddRateLimiter(options =>
 var app = builder.Build();
 
 // Important when app is behind a proxy (e.g. Render) to get correct client IP and scheme for rate limiting and Host gating
-app.UseForwardedHeaders(new ForwardedHeadersOptions
+var fwdOptions = new ForwardedHeadersOptions
 {
-    ForwardedHeaders =
-        ForwardedHeaders.XForwardedFor |
-        ForwardedHeaders.XForwardedProto,
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
 
-    // Only allow forwarded headers from known networks (recommended)
-    KnownIPNetworks = { }, // clears default
-    KnownProxies = { }   // clears default
-});
+    // Allow processing forwarded headers even when proxies aren't "known"
+    // (common for cloud hosts + Cloudflare)
+    RequireHeaderSymmetry = false,
+    ForwardLimit = null
+};
+
+// IMPORTANT: Clear defaults so it doesn't silently ignore forwarded headers
+fwdOptions.KnownIPNetworks.Clear();
+fwdOptions.KnownProxies.Clear();
+
+app.UseForwardedHeaders(fwdOptions);
 
 if (!app.Environment.IsDevelopment())
 {
