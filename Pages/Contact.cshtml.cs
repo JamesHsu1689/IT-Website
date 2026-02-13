@@ -99,7 +99,7 @@ public class ContactModel : PageModel
         if (!ModelState.IsValid) return Page();
 
         // 5) Cost fuse: global daily cap
-        if (!TryConsumeDailyAllowance(maxPerDay: 1))
+        if (!TryConsumeDailyAllowance(maxPerDay: 10))
         {
             // Show a real message to legit users (no email sent)
             ModelState.AddModelError("", "Contact form is temporarily unavailable. Please email us directly.");
