@@ -67,12 +67,12 @@ public class ContactModel : PageModel
         }
 
         // Test to verify we're correctly seeing client IP in various headers for proper rate limiting and heuristics (can remove in production)
-        var remoteIp = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "null";
-        var cfIp = Request.Headers["CF-Connecting-IP"].ToString();
-        var xff = Request.Headers["X-Forwarded-For"].ToString();
+        // var remoteIp = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "null";
+        // var cfIp = Request.Headers["CF-Connecting-IP"].ToString();
+        // var xff = Request.Headers["X-Forwarded-For"].ToString();
 
-        _logger.LogInformation("Contact IP Debug: RemoteIp={RemoteIp} CF={CF} XFF={XFF}",
-            remoteIp, cfIp, xff);
+        // _logger.LogInformation("Contact IP Debug: RemoteIp={RemoteIp} CF={CF} XFF={XFF}",
+        //     remoteIp, cfIp, xff);
 
         // 1) Honeypot
         if (!string.IsNullOrWhiteSpace(Website))
