@@ -43,7 +43,17 @@
           <div class="card-body p-4">
             <h4 class="fw-semibold mb-3">Request help</h4>
             
-            <form method="post">
+            <form method="post" asp-antiforgery="true">
+            
+              <input type="hidden" asp-for="FormTimeToken" />
+
+              <!-- Honeypot: real users never see/fill this -->
+              <div class="d-none">
+                  <label>Website</label>
+                  <input class="form-control" name="Website" autocomplete="off" tabindex="-1" />
+              </div>
+
+
                 <div class="row g-3">
 
                     <div class="col-md-6">                    
