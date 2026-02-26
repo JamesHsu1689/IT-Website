@@ -4,21 +4,19 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.RateLimiting;
-using Org.BouncyCastle.Security;
 using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace ITWebsite.Pages;
 
-[EnableRateLimiting("contact")] // Apply the "contact" rate limit policy to this page
+[EnableRateLimiting("contact")]
 public class ContactModel : PageModel
 {
     private readonly IConfiguration _config;
     private readonly IDataProtector _protector;
     private readonly ILogger<ContactModel> _logger;
 
-    // Simple in-memory daily cap (resets if app restarts)
     private static readonly ConcurrentDictionary<string, int> DailyCounts = new();
 
     public ContactModel(IConfiguration config, IDataProtectionProvider dp, ILogger<ContactModel> logger)
@@ -28,7 +26,6 @@ public class ContactModel : PageModel
         _logger = logger;
     }
 
-    // Signed token stored in hidden field
     [BindProperty] public string FormTimeToken { get; set; } = "";
 
     // Honeypot
@@ -43,7 +40,7 @@ public class ContactModel : PageModel
     [BindProperty, StringLength(30)]
     public string? PhoneNumber { get; set; } = "";
 
-    [BindProperty]
+    [BindProperty, Required, StringLength(50)]
     public string? ServiceType { get; set; } = "";
 
     [BindProperty, Required, StringLength(2000, MinimumLength = 10)]
@@ -52,16 +49,11 @@ public class ContactModel : PageModel
     [BindProperty]
     public string? DeviceType { get; set; } = "";
 
-    // Property not set; uncomment it in Contact.cshtml if you want to use it
-    // [BindProperty]
-    // public string? Urgency { get; set; } = "";
-
     [BindProperty]
-    public string? ServiceMode { get; set; } = "";
+    public string? ServiceMode { get; set; } = "Not sure";
 
     [BindProperty, Required, StringLength(20)]
-    public string ContactMethod { get; set; } = "";
-
+    public string ContactMethod { get; set; } = "Email";
 
     [BindProperty]
     [Range(typeof(bool), "true", "true", ErrorMessage = "You must agree to the Privacy Policy.")]
@@ -69,59 +61,76 @@ public class ContactModel : PageModel
 
     [TempData] public bool Sent { get; set; }
 
+    // PRG-friendly error message
+    [TempData] public string? ErrorMessage { get; set; }
+
+    // Draft fields for PRG on failure (so values persist on redirect)
+    [TempData] public string? Draft_Name { get; set; }
+    [TempData] public string? Draft_Email { get; set; }
+    [TempData] public string? Draft_Phone { get; set; }
+    [TempData] public string? Draft_ServiceType { get; set; }
+    [TempData] public string? Draft_Message { get; set; }
+    [TempData] public string? Draft_DeviceType { get; set; }
+    [TempData] public string? Draft_ServiceMode { get; set; }
+    [TempData] public string? Draft_ContactMethod { get; set; }
+    [TempData] public bool Draft_PrivacyConsent { get; set; }
+
     public void OnGet()
     {
-        // Create a signed “issued at” timestamp (unix seconds)
+        // Restore draft values from last failed send (if any)
+        if (!string.IsNullOrWhiteSpace(Draft_Name)) Name = Draft_Name!;
+        if (!string.IsNullOrWhiteSpace(Draft_Email)) Email = Draft_Email;
+        if (!string.IsNullOrWhiteSpace(Draft_Phone)) PhoneNumber = Draft_Phone;
+        if (!string.IsNullOrWhiteSpace(Draft_ServiceType)) ServiceType = Draft_ServiceType;
+        if (!string.IsNullOrWhiteSpace(Draft_Message)) Message = Draft_Message!;
+        if (!string.IsNullOrWhiteSpace(Draft_DeviceType)) DeviceType = Draft_DeviceType;
+        if (!string.IsNullOrWhiteSpace(Draft_ServiceMode)) ServiceMode = Draft_ServiceMode;
+        if (!string.IsNullOrWhiteSpace(Draft_ContactMethod)) ContactMethod = Draft_ContactMethod!;
+        PrivacyConsent = Draft_PrivacyConsent;
+
+        // New signed token for timing check
         var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
         FormTimeToken = _protector.Protect(now);
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        // 0) Only accept contact posts for your real domain (blocks direct Render-origin spam)
+        // 0) Only accept contact posts for your real domain (blocks direct-origin spam)
         if (!IsAllowedHost(Request.Host.Host))
-        {
             return NotFound();
-        }
-
-        // Test to verify we're correctly seeing client IP in various headers for proper rate limiting and heuristics (can remove in production)
-        // var remoteIp = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "null";
-        // var cfIp = Request.Headers["CF-Connecting-IP"].ToString();
-        // var xff = Request.Headers["X-Forwarded-For"].ToString();
-
-        // _logger.LogInformation("Contact IP Debug: RemoteIp={RemoteIp} CF={CF} XFF={XFF}",
-        //     remoteIp, cfIp, xff);
 
         // 1) Honeypot
         if (!string.IsNullOrWhiteSpace(Website))
         {
-            // Pretend success so bots don't learn
             Sent = true;
             return RedirectToPage();
         }
 
-        // 2) Time-to-submit check (reject super-fast bot posts)
+        // 2) Time-to-submit check
         if (!IsHumanTiming(FormTimeToken))
         {
-            // Pretend success so bots don't learn
             Sent = true;
             return RedirectToPage();
         }
 
-        // 3) Conditional validation (your existing logic)
+        // 3) Conditional validation
         ValidateConditionalRequirements();
 
-        // 4) Extra sanity checks (cheap heuristics)
+        // 4) Cheap heuristics
         ApplyBasicHeuristics();
 
-        if (!ModelState.IsValid) return Page();
+        if (!ModelState.IsValid)
+        {
+            // Validation errors: stay on page so user sees inline errors, and inputs remain
+            return Page();
+        }
 
         // 5) Cost fuse: global daily cap
         if (!TryConsumeDailyAllowance(maxPerDay: 10))
         {
-            // Show a real message to legit users (no email sent)
-            ModelState.AddModelError("", "Contact form is temporarily unavailable. Please email us directly.");
-            return Page();
+            ErrorMessage = "Contact form is temporarily unavailable. Please try again later.";
+            SaveDraft();
+            return RedirectToPage();
         }
 
         try
@@ -129,13 +138,18 @@ public class ContactModel : PageModel
             await SendEmailAsync();
             Sent = true;
 
-            // PRG pattern prevents duplicate email on refresh
-            return RedirectToPage();
+            ClearDraft();
+            return RedirectToPage(); // PRG prevents resend on refresh
         }
-        catch
+        catch (Exception ex)
         {
-            ModelState.AddModelError("", "Something went wrong sending your request. Please try again later.");
-            return Page();
+            _logger.LogError(ex, "Contact form send failed. Host={Host} Name={Name} Email={Email}",
+                Request.Host.Host, Name, Email);
+
+            ErrorMessage = "Something went wrong sending your request. Please try again later.";
+
+            SaveDraft();
+            return RedirectToPage(); // PRG on failure too (refresh won't retry POST)
         }
     }
 
@@ -157,9 +171,9 @@ public class ContactModel : PageModel
             var nowUnix = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             var ageSeconds = nowUnix - issuedAtUnix;
 
-            // Too fast? (bots) Too old? (replay)
             if (ageSeconds < 3) return false;
-            if (ageSeconds > 60 * 60) return false; // 1 hour
+            if (ageSeconds > 60 * 60) return false;
+
             return true;
         }
         catch
@@ -173,7 +187,6 @@ public class ContactModel : PageModel
         var key = DateTimeOffset.UtcNow.ToString("yyyyMMdd");
         var newValue = DailyCounts.AddOrUpdate(key, 1, (_, current) => current + 1);
 
-        // If exceeded, clamp and fail
         if (newValue > maxPerDay)
         {
             DailyCounts[key] = maxPerDay;
@@ -185,24 +198,17 @@ public class ContactModel : PageModel
 
     private void ApplyBasicHeuristics()
     {
-        // Basic link spam heuristic
         var urlCount = Regex.Matches(Message ?? "", @"https?://", RegexOptions.IgnoreCase).Count;
         if (urlCount >= 3)
-        {
             ModelState.AddModelError(nameof(Message), "Please remove extra links and try again.");
-        }
 
-        // Force trim
         Name = (Name ?? "").Trim();
         Email = (Email ?? "").Trim();
         PhoneNumber = (PhoneNumber ?? "").Trim();
         Message = (Message ?? "").Trim();
 
-        // Basic email format check when present
         if (!string.IsNullOrWhiteSpace(Email) && !new EmailAddressAttribute().IsValid(Email))
-        {
             ModelState.AddModelError(nameof(Email), "Please enter a valid email address.");
-        }
     }
 
     private async Task SendEmailAsync()
@@ -244,9 +250,7 @@ Message:
         var result = await client.SendAsync(WaitUntil.Completed, message);
 
         if (result.HasValue && result.Value.Status != EmailSendStatus.Succeeded)
-        {
             throw new InvalidOperationException($"ACS send failed. Status={result.Value.Status}");
-        }
     }
 
     private void ValidateConditionalRequirements()
@@ -258,6 +262,12 @@ Message:
 
         if (string.IsNullOrWhiteSpace(Message))
             ModelState.AddModelError(nameof(Message), "Message is required.");
+
+        if (string.IsNullOrWhiteSpace(ServiceType))
+            ModelState.AddModelError(nameof(ServiceType), "Please choose a service.");
+
+        if (!PrivacyConsent)
+            ModelState.AddModelError(nameof(PrivacyConsent), "You must agree to the Privacy Policy.");
 
         if (method.Equals("Any", StringComparison.OrdinalIgnoreCase))
         {
@@ -292,5 +302,32 @@ Message:
         }
 
         ModelState.AddModelError(nameof(ContactMethod), "Please choose a valid contact method.");
+    }
+
+    private void SaveDraft()
+    {
+        Draft_Name = Name;
+        Draft_Email = Email;
+        Draft_Phone = PhoneNumber;
+        Draft_ServiceType = ServiceType;
+        Draft_Message = Message;
+        Draft_DeviceType = DeviceType;
+        Draft_ServiceMode = ServiceMode;
+        Draft_ContactMethod = ContactMethod;
+        Draft_PrivacyConsent = PrivacyConsent;
+    }
+
+    private void ClearDraft()
+    {
+        Draft_Name = null;
+        Draft_Email = null;
+        Draft_Phone = null;
+        Draft_ServiceType = null;
+        Draft_Message = null;
+        Draft_DeviceType = null;
+        Draft_ServiceMode = null;
+        Draft_ContactMethod = null;
+        Draft_PrivacyConsent = false;
+        ErrorMessage = null;
     }
 }

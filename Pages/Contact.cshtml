@@ -4,7 +4,6 @@
   ViewData["Title"] = "Contact Us";
 }
 
-
 <section class="py-5">
   <div class="container">
     <div class="row g-4">
@@ -44,230 +43,204 @@
         <div class="card hover-lift">
           <div class="card-body p-4">
             <h4 class="fw-semibold mb-3">Let's get connected</h4>
-            
+
             <form method="post" asp-antiforgery="true">
-            
+
               <input type="hidden" asp-for="FormTimeToken" />
 
               <!-- Honeypot: real users never see/fill this -->
               <div class="d-none">
-                  <label>Website</label>
-                  <input class="form-control" name="Website" autocomplete="off" tabindex="-1" />
+                <label>Website</label>
+                <input class="form-control" name="Website" autocomplete="off" tabindex="-1" />
               </div>
 
+              <div class="row g-3">
 
-                <div class="row g-3">
-
-                    <div class="col-md-6">                    
-                      <label class="form-label required">Name</label>
-                      <input class="form-control" name="Name" id="nameInput" placeholder="Your name" />
-                      <span class="text-danger" asp-validation-for="Name"></span>
-                    </div>
-
-                    <div class="col-md-6" id="emailField">
-                      <label class="form-label required">Email</label>
-                      <input class="form-control" name="Email" id="emailInput" placeholder="example@email.com" />
-                      <span class="text-danger" asp-validation-for="Email"></span>
-                    </div>
-
-                    <div class="col-12 d-none" id="phoneField">
-                        <label class="form-label required">Phone Number</label>
-                        <input class="form-control" 
-                              name="PhoneNumber" 
-                              id="phoneInput"
-                              placeholder="(403) 123-4567" />
-                        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
-                    </div>
-
-
-                    
-                    <div class="col-12">
-                      <label class="form-label required">What do you need help with?</label>
-                      <select class="form-select" name="ServiceType" id="serviceType">
-                        <option value="" selected disabled>Choose a service...</option>
-                        <option value="General support">General support (printer, email, troubleshooting)</option>
-                        <option value="Wi-Fi & networking">Wi-Fi & networking</option>
-                        <option value="New device setup">New device setup</option>
-                        <option value="System restore">Complete system restore & optimization</option>
-                        <option value="Backup & storage">Backup & storage</option>
-                        <option value="NAS project">Private home storage (NAS) project</option>
-                        <option value="PC build">Custom PC build guidance</option>
-                        <option value="Not sure">Not sure, please recommend</option>
-                      </select>
-                    </div>
-
-
-
-                    <div class="col-12">
-                      <label class="form-label required">What’s happening?</label>
-                      <textarea class="form-control" name="Message" id="messageInput" rows="6"
-                        placeholder="Example: ‘My laptop is very slow and keeps freezing. I mainly use it for school. I’m worried about losing my files. I’d like it stable again.’"></textarea>
-                      <span class="text-danger" asp-validation-for="Message"></span>
-                    </div>
-
-
-
-                    <div class="col-12">
-                      <label class="form-label">Device type</label>
-                      <select class="form-select" name="DeviceType">
-                        <option value="" selected disabled>Choose a device type…</option>
-                        <option value="Windows laptop/desktop">Windows laptop/desktop</option>
-                        <option value="Mac">Mac</option>
-                        <option value="Phone/tablet">Phone/tablet</option>
-                        <option value="Wi-Fi / network">Wi-Fi / network</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-
-                    @* <div class="col-12">
-                      <label class="form-label">How urgent is this?</label>
-                      <select class="form-select" name="Urgency">
-                        <option value="Not urgent" selected>Not urgent</option>
-                        <option value="This week">This week</option>
-                        <option value="Today/tomorrow">Today / tomorrow</option>
-                        <option value="Urgent - deadline">Urgent (deadline / can’t work)</option>
-                      </select>
-                    </div> *@
-
-                    <div class="col-12">
-                      <label class="form-label">Where would you like help?</label>
-                      <select class="form-select" name="ServiceMode">
-                        <option value="Not sure" selected>Not sure</option>
-                        <option value="Remote">Remote (if possible)</option>
-                        <option value="In-home">In-home (Calgary)</option>
-                      </select>
-                    </div>
-
-
-
-
-                    <div class="col-12">
-                      <label class="form-label required">Preferred contact method</label>
-                      <select class="form-select" name="ContactMethod" id="contactMethod">                          
-                          <option value="Email">Email</option>
-                          <option value="Phone call">Phone call</option>
-                          <option value="Text">Text</option>          
-                          <option value="Any">Any</option>             
-                      </select>
-                      <span class="text-danger" asp-validation-for="ContactMethod"></span>
-                    </div>
-
-                    <div class="col-12 d-grid">
-                    <button type="submit" 
-                            id="submitBtn"
-                            class="btn btn-primary btn-lg">
-                        <span id="btnText">Submit</span>
-                        <span id="spinner" class="spinner-border spinner-border-sm ms-2 d-none"></span>
-                    </button>
-                    </div>
-
-                    <div class="form-check mt-3">
-                      <input class="form-check-input"
-                            type="checkbox"
-                            asp-for="PrivacyConsent">
-                      <label class="form-check-label small text-secondary required" asp-for="PrivacyConsent">
-                          I have read and agree to the <a asp-page="/Privacy">Privacy Policy</a>.
-                      </label>
-                  </div>
-
-                  <span asp-validation-for="PrivacyConsent" class="text-danger small"></span>
-
-                    <div asp-validation-summary="All" class="text-danger"></div>
-
-                    @if (Model.Sent)
-                    {
-                    <div class="alert alert-success mt-3">
-                        Your request has been sent. We’ll be in touch shortly.
-                    </div>
-                    }
-
+                <div class="col-md-6">
+                  <label class="form-label required" asp-for="Name">Name</label>
+                  <input class="form-control" asp-for="Name" id="nameInput" placeholder="Your name" />
+                  <span class="text-danger" asp-validation-for="Name"></span>
                 </div>
-                </form>
 
-                <script>
-                  const form = document.querySelector("form");
+                <div class="col-md-6" id="emailField">
+                  <label class="form-label required" asp-for="Email">Email</label>
+                  <input class="form-control" asp-for="Email" id="emailInput" placeholder="example@email.com" />
+                  <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
 
-                  const contactSelect = document.getElementById("contactMethod");
-                  const phoneField = document.getElementById("phoneField");
-                  const emailField = document.getElementById("emailField");
+                <div class="col-12 d-none" id="phoneField">
+                  <label class="form-label required" asp-for="PhoneNumber">Phone Number</label>
+                  <input class="form-control" asp-for="PhoneNumber" id="phoneInput" placeholder="(403) 123-4567" />
+                  <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                </div>
 
-                  const nameInput = document.getElementById("nameInput");
-                  const messageInput = document.getElementById("messageInput");
+                <div class="col-12">
+                  <label class="form-label required" asp-for="ServiceType">What do you need help with?</label>
+                  <select class="form-select" asp-for="ServiceType" id="serviceType">
+                    <option value="" disabled selected="@string.IsNullOrWhiteSpace(Model.ServiceType)">Choose a service...</option>
+                    <option value="General support">General support (printer, email, troubleshooting)</option>
+                    <option value="Wi-Fi & networking">Wi-Fi & networking</option>
+                    <option value="New device setup">New device setup</option>
+                    <option value="System restore">Complete system restore & optimization</option>
+                    <option value="Backup & storage">Backup & storage</option>
+                    <option value="NAS project">Private home storage (NAS) project</option>
+                    <option value="PC build">Custom PC build guidance</option>
+                    <option value="Not sure">Not sure, please recommend</option>
+                  </select>
+                  <span class="text-danger" asp-validation-for="ServiceType"></span>
+                </div>
 
-                  const emailInput = document.getElementById("emailInput");
-                  const phoneInput = document.getElementById("phoneInput");
+                <div class="col-12">
+                  <label class="form-label required" asp-for="Message">What’s happening?</label>
+                  <textarea class="form-control" asp-for="Message" id="messageInput" rows="6"
+                    placeholder="Example: ‘My laptop is very slow and keeps freezing. I mainly use it for school. I’m worried about losing my files. I’d like it stable again.’"></textarea>
+                  <span class="text-danger" asp-validation-for="Message"></span>
+                </div>
 
-                  const submitBtn = document.getElementById("submitBtn");
-                  const btnText = document.getElementById("btnText");
-                  const spinner = document.getElementById("spinner");
+                <div class="col-12">
+                  <label class="form-label" asp-for="DeviceType">Device type</label>
+                  <select class="form-select" asp-for="DeviceType">
+                    <option value="" disabled selected="@string.IsNullOrWhiteSpace(Model.DeviceType)">Choose a device type…</option>
+                    <option value="Windows laptop/desktop">Windows laptop/desktop</option>
+                    <option value="Mac">Mac</option>
+                    <option value="Phone/tablet">Phone/tablet</option>
+                    <option value="Wi-Fi / network">Wi-Fi / network</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
 
-                  function applyRequirements() {
-                    const method = contactSelect.value;
-                    const isEmail = method === "Email";
-                    const isPhoneOrText = (method === "Phone call" || method === "Text");
-                    const isAny = method === "Any";
+                <div class="col-12">
+                  <label class="form-label" asp-for="ServiceMode">Where would you like help?</label>
+                  <select class="form-select" asp-for="ServiceMode">
+                    <option value="Not sure">Not sure</option>
+                    <option value="Remote">Remote (if possible)</option>
+                    <option value="In-home">In-home (Calgary)</option>
+                  </select>
+                </div>
 
-                    nameInput.required = true;
-                    messageInput.required = true;
+                <div class="col-12">
+                  <label class="form-label required" asp-for="ContactMethod">Preferred contact method</label>
+                  <select class="form-select" asp-for="ContactMethod" id="contactMethod">
+                    <option value="Email">Email</option>
+                    <option value="Phone call">Phone call</option>
+                    <option value="Text">Text</option>
+                    <option value="Any">Any</option>
+                  </select>
+                  <span class="text-danger" asp-validation-for="ContactMethod"></span>
+                </div>
 
-                    if (isAny) {
-                      emailField.classList.remove("d-none");
-                      phoneField.classList.remove("d-none");
+                <div class="form-check mt-3">
+                  <input class="form-check-input" type="checkbox" asp-for="PrivacyConsent" />
+                  <label class="form-check-label small text-secondary required" asp-for="PrivacyConsent">
+                    I have read and agree to the <a asp-page="/Privacy">Privacy Policy</a>.
+                  </label>
+                </div>
+                <span asp-validation-for="PrivacyConsent" class="text-danger small"></span>
 
-                      emailInput.disabled = false;
-                      phoneInput.disabled = false;
+                <div class="col-12 d-grid">
+                  <button type="submit" id="submitBtn" class="btn btn-primary btn-lg">
+                    <span id="btnText">Submit</span>
+                    <span id="spinner" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                  </button>
+                </div>
 
-                      emailInput.required = true;
-                      phoneInput.required = true;
-                      return;
-                    }
+                @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+                {
+                  <div class="alert alert-danger mt-3">@Model.ErrorMessage</div>
+                }
 
-                    if (isEmail) {
-                      emailField.classList.remove("d-none");
-                      phoneField.classList.add("d-none");
+                <div asp-validation-summary="All" class="text-danger"></div>
 
-                      emailInput.disabled = false;
-                      emailInput.required = true;
+                @if (Model.Sent)
+                {
+                  <div class="alert alert-success mt-3">
+                    Your request has been sent. We’ll be in touch shortly.
+                  </div>
+                }
 
-                      phoneInput.disabled = true;
-                      phoneInput.required = false;
-                      phoneInput.removeAttribute("required");
-                      return;
-                    }
+              </div>
+            </form>
 
-                    if (isPhoneOrText) {
-                      emailField.classList.add("d-none");
-                      phoneField.classList.remove("d-none");
+            <script>
+              const form = document.querySelector("form");
 
-                      emailInput.disabled = true;
-                      emailInput.required = false;
-                      emailInput.removeAttribute("required");
+              const contactSelect = document.getElementById("contactMethod");
+              const phoneField = document.getElementById("phoneField");
+              const emailField = document.getElementById("emailField");
 
-                      phoneInput.disabled = false;
-                      phoneInput.required = true;
-                      return;
-                    }
-                  }
+              const nameInput = document.getElementById("nameInput");
+              const messageInput = document.getElementById("messageInput");
 
-                  contactSelect.addEventListener("change", applyRequirements);
-                  applyRequirements();
+              const emailInput = document.getElementById("emailInput");
+              const phoneInput = document.getElementById("phoneInput");
 
-                  form.addEventListener("submit", function () {
+              const submitBtn = document.getElementById("submitBtn");
+              const btnText = document.getElementById("btnText");
+              const spinner = document.getElementById("spinner");
 
-                    // Re-apply rules before validation
-                    applyRequirements();
+              function applyRequirements() {
+                const method = contactSelect.value;
+                const isEmail = method === "Email";
+                const isPhoneOrText = (method === "Phone call" || method === "Text");
+                const isAny = method === "Any";
 
-                    // If browser validation fails, do NOT show spinner
-                    if (!form.checkValidity()) return;
+                nameInput.required = true;
+                messageInput.required = true;
 
-                    // Disable button + show spinner
-                    submitBtn.disabled = true;
-                    submitBtn.classList.add("opacity-75");
+                if (isAny) {
+                  emailField.classList.remove("d-none");
+                  phoneField.classList.remove("d-none");
 
-                    btnText.innerText = "Sending...";
-                    spinner.classList.remove("d-none");
-                  });
-                </script>
+                  emailInput.disabled = false;
+                  phoneInput.disabled = false;
+
+                  emailInput.required = true;
+                  phoneInput.required = true;
+                  return;
+                }
+
+                if (isEmail) {
+                  emailField.classList.remove("d-none");
+                  phoneField.classList.add("d-none");
+
+                  emailInput.disabled = false;
+                  emailInput.required = true;
+
+                  phoneInput.disabled = true;
+                  phoneInput.required = false;
+                  phoneInput.removeAttribute("required");
+                  return;
+                }
+
+                if (isPhoneOrText) {
+                  emailField.classList.add("d-none");
+                  phoneField.classList.remove("d-none");
+
+                  emailInput.disabled = true;
+                  emailInput.required = false;
+                  emailInput.removeAttribute("required");
+
+                  phoneInput.disabled = false;
+                  phoneInput.required = true;
+                  return;
+                }
+              }
+
+              contactSelect.addEventListener("change", applyRequirements);
+              applyRequirements();
+
+              form.addEventListener("submit", function () {
+                applyRequirements();
+
+                if (!form.checkValidity()) return;
+
+                submitBtn.disabled = true;
+                submitBtn.classList.add("opacity-75");
+
+                btnText.innerText = "Sending...";
+                spinner.classList.remove("d-none");
+              });
+            </script>
 
           </div>
         </div>
