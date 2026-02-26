@@ -1,6 +1,7 @@
 ﻿@page
 @model ITWebsite.Pages.ContactModel
 @{
+  ViewData["Title"] = "Contact Us";
 }
 
 
@@ -10,7 +11,8 @@
       <div class="col-lg-6">
         <h1 class="fw-bold section-title mb-2">Contact</h1>
         <p class="text-secondary mb-4">
-          Tell me what you need help with. I’ll reply with next steps and an estimate.
+          Tell me what’s going on and what you’re trying to accomplish. I’ll reply with next steps
+          (remote, in-home, or a full system restore) and a clear estimate.
         </p>
 
         <div class="d-flex gap-3 mb-3">
@@ -33,7 +35,7 @@
           <div class="icon-badge"><i class="bi bi-shield-check fs-5"></i></div>
           <div>
             <div class="fw-semibold">What to expect</div>
-            <div class="text-secondary">Clear communication, documentation, and honest pricing</div>
+            <div class="text-secondary">Clear communication, honest pricing, and a short initial triage to recommend next steps.</div>
           </div>
         </div>
       </div>
@@ -77,11 +79,66 @@
                         <span class="text-danger" asp-validation-for="PhoneNumber"></span>
                     </div>
 
+
+                    
                     <div class="col-12">
-                      <label class="form-label">Your message</label>
-                      <textarea class="form-control" name="Message" id="messageInput" rows="5"></textarea>
+                      <label class="form-label">What do you need help with?</label>
+                      <select class="form-select" name="ServiceType" id="serviceType">
+                        <option value="" selected disabled>Choose one…</option>
+                        <option value="General support">General support (printer, email, troubleshooting)</option>
+                        <option value="Wi-Fi & networking">Wi-Fi & networking</option>
+                        <option value="New device setup">New device setup</option>
+                        <option value="System restore">Complete system restore & optimization</option>
+                        <option value="Backup & storage">Backup & storage</option>
+                        <option value="NAS project">Private home storage (NAS) project</option>
+                        <option value="PC build">Custom PC build guidance</option>
+                        <option value="Not sure">Not sure, please recommend</option>
+                      </select>
+                    </div>
+
+
+
+                    <div class="col-12">
+                      <label class="form-label">What’s happening?</label>
+                      <textarea class="form-control" name="Message" id="messageInput" rows="6"
+                        placeholder="Example: ‘My laptop is very slow and keeps freezing. I mainly use it for school. I’m worried about losing photos. I’d like it stable and secure again.’"></textarea>
                       <span class="text-danger" asp-validation-for="Message"></span>
                     </div>
+
+
+
+                    <div class="col-12">
+                      <label class="form-label">Device type</label>
+                      <select class="form-select" name="DeviceType">
+                        <option value="Windows laptop/desktop" selected>Windows laptop/desktop</option>
+                        <option value="Mac">Mac</option>
+                        <option value="Phone/tablet">Phone/tablet</option>
+                        <option value="Wi-Fi / network">Wi-Fi / network</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+
+                    @* <div class="col-12">
+                      <label class="form-label">How urgent is this?</label>
+                      <select class="form-select" name="Urgency">
+                        <option value="Not urgent" selected>Not urgent</option>
+                        <option value="This week">This week</option>
+                        <option value="Today/tomorrow">Today / tomorrow</option>
+                        <option value="Urgent - deadline">Urgent (deadline / can’t work)</option>
+                      </select>
+                    </div> *@
+
+                    <div class="col-12">
+                      <label class="form-label">Where would you like help?</label>
+                      <select class="form-select" name="ServiceMode">
+                        <option value="Not sure" selected>Not sure</option>
+                        <option value="Remote">Remote (if possible)</option>
+                        <option value="In-home">In-home (Calgary)</option>
+                      </select>
+                    </div>
+
+
+
 
                     <div class="col-12">
                       <label class="form-label">Preferred contact method</label>

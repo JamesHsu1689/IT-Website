@@ -1,6 +1,7 @@
 ﻿@page
 @model ITWebsite.Pages.ServicesModel
 @{
+  ViewData["Title"] = "Services";
 }
 
 <section class="py-5">
@@ -9,15 +10,73 @@
       <div class="col-lg-8">
         <h1 class="fw-bold section-title mb-2">Services</h1>
         <p class="text-secondary mb-0">
-          Reliable IT help for home users and families (No businesses).
+          Friendly, professional IT help for home users and families in Calgary. <strong>Residential only</strong> — no business IT.
         </p>
       </div>
       <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-        <a class="btn btn-primary" asp-page="/Contact">
+        @* <a class="btn btn-primary" asp-page="/Contact">
           Request help <i class="bi bi-arrow-right ms-1"></i>
-        </a>
+        </a> *@
       </div>
     </div>
+
+
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="p-3 rounded-4 border bg-light h-100">
+          <div class="fw-semibold mb-1"><i class="bi bi-chat-dots me-1"></i>Quick intake</div>
+          <div class="text-secondary small">A short call/message to understand your setup and goals.</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 rounded-4 border bg-light h-100">
+          <div class="fw-semibold mb-1"><i class="bi bi-tools me-1"></i>Fix + explain</div>
+          <div class="text-secondary small">Practical solutions with clear explanations (no jargon).</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 rounded-4 border bg-light h-100">
+          <div class="fw-semibold mb-1"><i class="bi bi-shield-check me-1"></i>Safer defaults</div>
+          <div class="text-secondary small">Where appropriate, I leave things cleaner and more secure than before.</div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="p-4 rounded-4 border bg-white hover-lift mb-4">
+      <div class="row g-3 align-items-center">
+        <div class="col-lg-8">
+          <div class="text-uppercase small text-secondary mb-1">Featured service</div>
+          <h3 class="fw-bold mb-2">Complete System Restore & Optimization</h3>
+          <p class="text-secondary mb-3">
+            When a computer is slow, unstable, or “acting weird,” surface-level fixes can waste time.
+            This service restores your system properly — with your data protected and your setup rebuilt cleanly.
+          </p>
+          <div class="row g-2 small">
+            <div class="col-md-6"><i class="bi bi-check2-circle text-success me-1"></i>Verified data backup (before changes)</div>
+            <div class="col-md-6"><i class="bi bi-check2-circle text-success me-1"></i>Clean Windows installation + updates</div>
+            <div class="col-md-6"><i class="bi bi-check2-circle text-success me-1"></i>Driver verification + essential software</div>
+            <div class="col-md-6"><i class="bi bi-check2-circle text-success me-1"></i>Email/printer reconnection + final check</div>
+          </div>
+          <div class="small text-secondary mt-3">
+            Optional add-ons: cloud backup setup, password manager, Wi-Fi optimization, private home storage (NAS).
+          </div>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a class="btn btn-primary btn-lg w-100 w-lg-auto" asp-page="/Contact">
+            Request help <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+          <div class="small text-secondary mt-2">
+            Starting at <strong>$175</strong> (scope depends on device + data size).
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 
     <div class="row g-4">
       <div class="col-md-6 col-lg-4">
@@ -26,10 +85,10 @@
             <div class="icon-badge mb-3"><i class="bi bi-laptop fs-5"></i></div>
             <h5 class="fw-semibold">Computer Optimization & Troubleshooting</h5>
               <ul class="text-secondary mb-0">
-                <li>Slow PC diagnosis & cleanup</li>
-                <li>Startup / performance tuning</li>
-                <li>Driver / update issues</li>
-                <li>SSD upgrade planning</li>
+                <li>Slow PC diagnosis & practical fixes</li>
+                <li>Startup errors, freezes, random crashes</li>
+                <li>Updates, drivers, and “it won’t behave” issues</li>
+                <li>Upgrade recommendations (SSD/RAM) when it makes sense</li>
               </ul>
           </div>
         </div>
@@ -41,10 +100,10 @@
             <div class="icon-badge mb-3"><i class="bi bi-router fs-5"></i></div>
             <h5 class="fw-semibold">Home WiFi & Networking</h5>
               <ul class="text-secondary mb-0">
-                <li>WiFi coverage optimization</li>
-                <li>Router & mesh setup</li>
-                <li>Printer connectivity issues</li>
-                <li>Device connection troubleshooting</li>
+                <li>Wi-Fi coverage & speed troubleshooting</li>
+                <li>Router / mesh setup and cleanup</li>
+                <li>Printer connection and “offline” problems</li>
+                <li>Smart devices: TVs, consoles, cameras, doorbells</li>
               </ul>
           </div>
         </div>
@@ -56,10 +115,10 @@
             <div class="icon-badge mb-3"><i class="bi bi-tools fs-5"></i></div>
               <h5 class="fw-semibold">Custom PC Build Guidance</h5>
               <ul class="text-secondary mb-0">
-                <li>Parts selection & compatibility review</li>
-                <li>Gaming / workstation build planning</li>
-                <li>Assembly guidance & setup</li>
-                <li>BIOS & driver setup basics</li>
+                <li>Parts list review (value + compatibility)</li>
+                <li>Build planning for gaming / school / creative work</li>
+                <li>Assembly guidance & first boot setup</li>
+                <li>BIOS basics, drivers, and stability checks</li>
               </ul>
           </div>
         </div>
@@ -71,10 +130,10 @@
             <div class="icon-badge mb-3"><i class="bi bi-shield-lock fs-5"></i></div>
             <h5 class="fw-semibold">Security & Safe Defaults</h5>
               <ul class="text-secondary mb-0">
-                <li>Password manager setup</li>
-                <li>Basic backup configuration</li>
-                <li>Safer device settings</li>
-                <li>Security hygiene review</li>
+                <li>Password manager setup (and how to use it)</li>
+                <li>MFA setup for key accounts (Google/Microsoft/Apple)</li>
+                <li>Safer Windows and browser settings</li>
+                <li>Quick security hygiene review (simple habits that matter)</li>
               </ul>
           </div>
         </div>
@@ -86,10 +145,10 @@
             <div class="icon-badge mb-3"><i class="bi bi-cloud-check fs-5"></i></div>           
             <h5 class="fw-semibold">Backup & Storage</h5>
               <ul class="text-secondary mb-0">
-                <li>External drive backup</li>
-                <li>NAS installation</li>
-                <li>Home file organization</li>
-                <li>Backup & restore</li>
+                <li>External drive backup setup (simple + reliable)</li>
+                <li>Cloud backup setup (OneDrive / Google Drive / Dropbox)</li>
+                <li><strong>Private home storage (NAS)</strong> — planned & quoted as a project</li>
+                <li>Restore testing so you know it actually works</li>
               </ul>
           </div>
         </div>
@@ -101,10 +160,10 @@
             <div class="icon-badge mb-3"><i class="bi bi-plus-circle fs-5"></i></div>
             <h5 class="fw-semibold">New Device Setup</h5>
               <ul class="text-secondary mb-0">
-                <li>New laptop setup</li>
-                <li>Data transfer assistance</li>
-                <li>Smart TV & streaming setup</li>
-                <li>Printer & peripheral setup</li>
+                <li>New laptop setup (clean, updated, ready)</li>
+                <li>Data transfer + account sign-ins</li>
+                <li>Email, printer, and basic apps configured</li>
+                <li>Smart TV & streaming setup (Wi-Fi + accounts)</li>
               </ul>
           </div>
         </div>
@@ -113,13 +172,15 @@
       @* Add more service cards here *@
     </div>
 
-    
+    <div class="small text-secondary mt-3">
+      <strong>Note:</strong> Kairos is residential-only. If you need business IT support, I’m happy to refer you to a local service provider.
+    </div>
 
     <div class="mt-5 p-4 rounded-4 border bg-light">
       <div class="row align-items-center g-3">
         <div class="col-lg-8">
           <h4 class="fw-semibold mb-1">Not sure what you need?</h4>
-          <p class="text-secondary mb-0">Describe the issue and let's work together to find the best solution.</p>
+          <p class="text-secondary mb-0">Tell me what’s going on and I’ll point you in the right direction.</p>
         </div>
         <div class="col-lg-4 text-lg-end">
           <a class="btn btn-primary btn-lg w-100 w-lg-auto" asp-page="/Contact">

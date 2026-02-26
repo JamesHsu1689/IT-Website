@@ -43,8 +43,21 @@ public class ContactModel : PageModel
     [BindProperty, StringLength(30)]
     public string? PhoneNumber { get; set; } = "";
 
+    [BindProperty]
+    public string? ServiceType { get; set; } = "";
+
     [BindProperty, Required, StringLength(2000, MinimumLength = 10)]
     public string Message { get; set; } = "";
+
+    [BindProperty]
+    public string? DeviceType { get; set; } = "";
+
+    // Property not set; uncomment it in Contact.cshtml if you want to use it
+    // [BindProperty]
+    // public string? Urgency { get; set; } = "";
+
+    [BindProperty]
+    public string? ServiceMode { get; set; } = "";
 
     [BindProperty, Required, StringLength(20)]
     public string ContactMethod { get; set; } = "";
@@ -208,6 +221,9 @@ Name: {Name}
 Email: {Email}
 Phone: {PhoneNumber}
 Preferred Contact: {ContactMethod}
+Service Type: {ServiceType}
+Device Type: {DeviceType}
+Service Mode: {ServiceMode}
 
 Message:
 {Message}
