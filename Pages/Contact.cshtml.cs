@@ -56,7 +56,7 @@ public class ContactModel : PageModel
     public string ContactMethod { get; set; } = "Email";
 
     [BindProperty]
-    [Range(typeof(bool), "true", "true")]
+    //[Range(typeof(bool), "true", "true")]
     public bool PrivacyConsent { get; set; }
 
     [TempData] public bool Sent { get; set; }
