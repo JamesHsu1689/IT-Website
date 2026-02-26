@@ -1,0 +1,89 @@
+﻿@page
+@model ITWebsite.Pages.TermsModel
+@{
+    ViewData["Title"] = "Terms of Service";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+
+                <h1 class="fw-bold section-title mb-4">Terms of Service</h1>
+
+                <p class="text-secondary">
+                    Effective Date: @DateTime.Now.ToString("MMMM dd, yyyy")
+                </p>
+
+                <p>
+                    These Terms govern the provision of residential IT support services by Kairos Technologies.
+                    By requesting or receiving services, you agree to these terms.
+                </p>
+
+                <h5 class="fw-semibold mt-4">1. Scope of Services</h5>
+                <p>
+                    Kairos Technologies provides independent residential IT support including troubleshooting,
+                    device setup, home network configuration, software assistance, and remote or on-site support.
+                </p>
+                <p>
+                    Services are provided for residential clients only. Business IT services,
+                    managed services, and enterprise support are not offered.
+                </p>
+
+                <h5 class="fw-semibold mt-4">2. No Guarantee of Data Preservation</h5>
+                <p>
+                    Clients are responsible for backing up their data before service begins.
+                    While reasonable care is taken, Kairos Technologies is not responsible for data loss,
+                    file corruption, or hardware failure occurring during or after service.
+                </p>
+
+                <h5 class="fw-semibold mt-4">3. Limitation of Liability</h5>
+                <p>
+                    To the maximum extent permitted by law, liability is limited to the amount paid
+                    for the specific service provided.
+                </p>
+                <p>
+                    Kairos Technologies is not liable for indirect, incidental, or consequential damages,
+                    including loss of data or loss of use.
+                </p>
+
+                <h5 class="fw-semibold mt-4">4. Remote Support Authorization</h5>
+                <p>
+                    By requesting remote assistance, you authorize temporary remote access to your device
+                    for the purpose of performing the requested work. You may terminate the session at any time.
+                </p>
+
+                <h5 class="fw-semibold mt-4">5. On-Site Services</h5>
+                <p>
+                    For in-home visits, clients are responsible for providing a safe working environment.
+                    Pre-existing device damage or unrelated hardware failures discovered during service
+                    are not the responsibility of Kairos Technologies.
+                </p>
+
+                <h5 class="fw-semibold mt-4">6. Payment Terms</h5>
+                <p>
+                    Service fees are communicated prior to or at the beginning of service.
+                    Payment is due upon completion unless otherwise agreed.
+                    Diagnostic fees may apply regardless of outcome.
+                </p>
+
+                <h5 class="fw-semibold mt-4">7. No Warranty</h5>
+                <p>
+                    Services are provided on an as-is basis without guarantees of permanent issue resolution,
+                    compatibility with third-party software, or continued performance of aging hardware.
+                </p>
+
+                <h5 class="fw-semibold mt-4">8. Governing Law</h5>
+                <p>
+                    These Terms are governed by the laws of the Province of Alberta and applicable Canadian federal laws.
+                </p>
+
+                <h5 class="fw-semibold mt-4">9. Changes to Terms</h5>
+                <p>
+                    These Terms may be updated periodically. Updated versions will be posted on this page.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>

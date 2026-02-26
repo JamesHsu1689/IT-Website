@@ -62,6 +62,11 @@ public class ContactModel : PageModel
     [BindProperty, Required, StringLength(20)]
     public string ContactMethod { get; set; } = "";
 
+
+    [BindProperty]
+    [Required(ErrorMessage = "You must agree to the Privacy Policy.")]
+    public bool PrivacyConsent { get; set; }
+
     [TempData] public bool Sent { get; set; }
 
     public void OnGet()

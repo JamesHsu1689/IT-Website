@@ -84,7 +84,7 @@
                     <div class="col-12">
                       <label class="form-label">What do you need help with?</label>
                       <select class="form-select" name="ServiceType" id="serviceType">
-                        <option value="" selected disabled>Choose one…</option>
+                        <option value="" selected disabled>Choose a service...</option>
                         <option value="General support">General support (printer, email, troubleshooting)</option>
                         <option value="Wi-Fi & networking">Wi-Fi & networking</option>
                         <option value="New device setup">New device setup</option>
@@ -101,7 +101,7 @@
                     <div class="col-12">
                       <label class="form-label">What’s happening?</label>
                       <textarea class="form-control" name="Message" id="messageInput" rows="6"
-                        placeholder="Example: ‘My laptop is very slow and keeps freezing. I mainly use it for school. I’m worried about losing photos. I’d like it stable and secure again.’"></textarea>
+                        placeholder="Example: ‘My laptop is very slow and keeps freezing. I mainly use it for school. I’m worried about losing my files. I’d like it stable again.’"></textarea>
                       <span class="text-danger" asp-validation-for="Message"></span>
                     </div>
 
@@ -110,7 +110,8 @@
                     <div class="col-12">
                       <label class="form-label">Device type</label>
                       <select class="form-select" name="DeviceType">
-                        <option value="Windows laptop/desktop" selected>Windows laptop/desktop</option>
+                        <option value="" selected disabled>Choose a device type…</option>
+                        <option value="Windows laptop/desktop">Windows laptop/desktop</option>
                         <option value="Mac">Mac</option>
                         <option value="Phone/tablet">Phone/tablet</option>
                         <option value="Wi-Fi / network">Wi-Fi / network</option>
@@ -159,6 +160,17 @@
                         <span id="spinner" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                     </button>
                     </div>
+
+                    <div class="form-check mt-3">
+                      <input class="form-check-input"
+                            type="checkbox"
+                            asp-for="PrivacyConsent">
+                      <label class="form-check-label small text-secondary" asp-for="PrivacyConsent">
+                          I have read and agree to the <a asp-page="/Privacy">Privacy Policy</a>.
+                      </label>
+                  </div>
+
+                  <span asp-validation-for="PrivacyConsent" class="text-danger small"></span>
 
                     <div asp-validation-summary="All" class="text-danger"></div>
 
