@@ -56,7 +56,7 @@ public class ContactModel : PageModel
     public string ContactMethod { get; set; } = "Email";
 
     [BindProperty]
-    [Range(typeof(bool), "true", "true", ErrorMessage = "You must agree to the Privacy Policy.")]
+    [Range(typeof(bool), "true", "true", ErrorMessage = "agree to the Privacy Policy.")]
     public bool PrivacyConsent { get; set; }
 
     [TempData] public bool Sent { get; set; }
@@ -126,7 +126,7 @@ public class ContactModel : PageModel
         }
 
         // 5) Cost fuse: global daily cap
-        if (!TryConsumeDailyAllowance(maxPerDay: 10))
+        if (!TryConsumeDailyAllowance(maxPerDay: 50))
         {
             ErrorMessage = "Contact form is temporarily unavailable. Please try again later.";
             SaveDraft();
