@@ -164,3 +164,9 @@ body {
 .site-navbar.nav-scrolled .navbar-brand img {
   height: 54px;
 }
+
+
+.required::after {
+  content: " *";
+  color: red; /* Optional: style the asterisk color */
+}

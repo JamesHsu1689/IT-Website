@@ -59,19 +59,19 @@
                 <div class="row g-3">
 
                     <div class="col-md-6">                    
-                      <label class="form-label">Name</label>
+                      <label class="form-label required">Name</label>
                       <input class="form-control" name="Name" id="nameInput" placeholder="Your name" />
                       <span class="text-danger" asp-validation-for="Name"></span>
                     </div>
 
                     <div class="col-md-6" id="emailField">
-                      <label class="form-label">Email</label>
+                      <label class="form-label required">Email</label>
                       <input class="form-control" name="Email" id="emailInput" placeholder="example@email.com" />
                       <span class="text-danger" asp-validation-for="Email"></span>
                     </div>
 
                     <div class="col-12 d-none" id="phoneField">
-                        <label class="form-label">Phone Number</label>
+                        <label class="form-label required">Phone Number</label>
                         <input class="form-control" 
                               name="PhoneNumber" 
                               id="phoneInput"
@@ -82,7 +82,7 @@
 
                     
                     <div class="col-12">
-                      <label class="form-label">What do you need help with?</label>
+                      <label class="form-label required">What do you need help with?</label>
                       <select class="form-select" name="ServiceType" id="serviceType">
                         <option value="" selected disabled>Choose a service...</option>
                         <option value="General support">General support (printer, email, troubleshooting)</option>
@@ -99,7 +99,7 @@
 
 
                     <div class="col-12">
-                      <label class="form-label">What’s happening?</label>
+                      <label class="form-label required">What’s happening?</label>
                       <textarea class="form-control" name="Message" id="messageInput" rows="6"
                         placeholder="Example: ‘My laptop is very slow and keeps freezing. I mainly use it for school. I’m worried about losing my files. I’d like it stable again.’"></textarea>
                       <span class="text-danger" asp-validation-for="Message"></span>
@@ -142,7 +142,7 @@
 
 
                     <div class="col-12">
-                      <label class="form-label">Preferred contact method</label>
+                      <label class="form-label required">Preferred contact method</label>
                       <select class="form-select" name="ContactMethod" id="contactMethod">                          
                           <option value="Email">Email</option>
                           <option value="Phone call">Phone call</option>
@@ -165,7 +165,7 @@
                       <input class="form-check-input"
                             type="checkbox"
                             asp-for="PrivacyConsent">
-                      <label class="form-check-label small text-secondary" asp-for="PrivacyConsent">
+                      <label class="form-check-label small text-secondary required" asp-for="PrivacyConsent">
                           I have read and agree to the <a asp-page="/Privacy">Privacy Policy</a>.
                       </label>
                   </div>

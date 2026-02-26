@@ -64,7 +64,7 @@ public class ContactModel : PageModel
 
 
     [BindProperty]
-    [Required(ErrorMessage = "You must agree to the Privacy Policy.")]
+    [Range(typeof(bool), "true", "true", ErrorMessage = "You must agree to the Privacy Policy.")]
     public bool PrivacyConsent { get; set; }
 
     [TempData] public bool Sent { get; set; }
