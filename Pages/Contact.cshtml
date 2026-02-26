@@ -121,6 +121,7 @@
                 <div class="col-12">
                   <label class="form-label required" asp-for="ContactMethod">Preferred contact method</label>
                   <select class="form-select" asp-for="ContactMethod" id="contactMethod">
+                    <option value="" disabled selected="@string.IsNullOrWhiteSpace(Model.ContactMethod)">Choose a contact method…</option>
                     <option value="Email">Email</option>
                     <option value="Phone call">Phone call</option>
                     <option value="Text">Text</option>

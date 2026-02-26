@@ -53,7 +53,7 @@ public class ContactModel : PageModel
     public string? ServiceMode { get; set; } = "Not sure";
 
     [BindProperty, Required, StringLength(20)]
-    public string ContactMethod { get; set; } = "Email";
+    public string ContactMethod { get; set; } = "";
 
     [BindProperty]
     //[Range(typeof(bool), "true", "true")]
