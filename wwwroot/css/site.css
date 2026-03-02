@@ -170,3 +170,92 @@ body {
   content: " *";
   color: red; /* Optional: style the asterisk color */
 }
+
+
+
+/* Mobile navbar: allow collapse panel to expand normally */
+@media (max-width: 991.98px) {
+  .site-navbar .container {
+    height: auto;              /* IMPORTANT: remove the fixed 64px height */
+    align-items: stretch;      /* lets the collapse take full width */
+    flex-wrap: wrap;           /* ensures toggler + collapse stack properly */
+  }
+
+  .site-navbar .navbar-brand {
+    height: 64px;              /* keep brand area consistent */
+  }
+}
+
+
+
+/* Mobile dropdown panel styling */
+@media (max-width: 991.98px) {
+  .site-navbar .navbar-collapse {
+    background: rgba(33, 37, 41, 0.98); /* dark bg like your navbar */
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    /* border-radius: 0.75rem; */
+    /* border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35); */
+  }
+
+  .site-navbar .navbar-nav {
+    align-items: stretch !important;
+    gap: 0.25rem;
+  }
+
+  /* Make your "Request help" button look good in the stack */
+  .site-navbar .navbar-nav .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .site-navbar .navbar-collapse {
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* On mobile/tablet, don't use fixed-top behavior so the menu can push content down */
+@media (max-width: 991.98px) {
+  .site-navbar.fixed-top {
+    position: sticky;   /* participates in layout; expands push content */
+    top: 0;
+  }
+
+  body {
+    padding-top: 0;     /* fixed-top needed this; sticky does not */
+  }
+}
+
+
+@media (max-width: 991.98px) {
+
+  /* Center everything */
+  .site-navbar .navbar-nav {
+    text-align: center;
+  }
+
+  /* Bigger nav links */
+  .site-navbar .nav-link {
+    font-size: 1.4rem;
+    padding: 0.9rem 0;
+  }
+
+  /* Divider lines between items */
+  .site-navbar .nav-item {
+    /* border-bottom: 1px solid rgba(255,255,255,0.08); */
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Remove divider on last item (before button) */
+  .site-navbar .nav-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Space above button */
+  .site-navbar .navbar-nav .btn {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+  }
+}

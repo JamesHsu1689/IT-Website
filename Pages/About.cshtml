@@ -1,0 +1,79 @@
+﻿@page
+@model ITWebsite.Pages.AboutModel
+@{
+  ViewData["Title"] = "About";
+}
+
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h1 class="fw-bold section-title mb-3">About</h1>
+
+        <p class="lead text-secondary mb-4">
+            Hello! I'm James, the person behind Kairos Technologies.     
+        </p>
+
+        <p class="lead text-secondary mb-4">
+            Kairos is a personal project I run outside of my primary IT career. I started this endeavour because I've always enjoyed helping friends and family solve their technology problems, and over time I decided to develop it into something more structured and dependable for others in my community.     
+        </p>
+
+        <p class="lead text-secondary mb-4">
+            It keeps me sharp, keeps me learning, and allows me to continuously refine my technical skills in real-world environments while working directly with people.
+        </p>
+
+        <h2 class="fw-bold section-title mb-3">My Approach</h2>
+
+        <p class="lead text-secondary mb-4">I tend to approach technical problems with a systems mindset. Even in small home environments, I look beyond the immediate issue and consider the overall configuration, data protection, security posture, and long-term stability.</p>
+
+        <p class="lead text-secondary mb-4">A slow computer or unstable network is often just a symptom. I try to look below the surface to analyze the environment as a whole, such as how it is set up, how it’s being used, and where risks or non-standard practices may exist.</p>
+
+        <p class="lead text-secondary mb-4">After resolving the issue, I aim to leave not just the device, but the system as a whole in a cleaner, more stable state than I found it. Clear structure, sensible defaults, and thoughtful configuration reduce future problems and make systems easier to manage.</p>
+
+        <p class="lead text-secondary mb-4">This project gives me the opportunity to apply that mindset in real-world scenarios where reliability matters and decisions have practical consequences.</p>         
+
+        <br>
+
+        <div class="mt-4 d-flex flex-column flex-sm-row gap-2">
+          <a class="btn btn-primary btn-lg" asp-page="/Contact">
+            Contact me <i class="bi bi-envelope ms-1"></i>
+          </a>
+          <a class="btn btn-outline-primary btn-lg" asp-page="/Services">
+            What I help with
+          </a>
+        </div>
+
+        @* <p class="small text-secondary mt-4">
+          This website was designed, developed, and deployed by me. I manager everything from application development to cloud hosting.
+        </p> *@
+        
+      </div>
+
+      <div class="col-lg-4">
+        <div class="p-4 rounded-4 border bg-white hover-lift">
+          <h5 class="fw-semibold mb-2">A bit of background</h5>
+          <p class="text-secondary mb-3">
+            I’m a graduate of BCIT’s Computer Systems Technology program, with seven years of experience in electronics manufacturing. My background includes electronics assembly, team leadership, circuit analysis, component-level board repair, hardware validation, and first-line IT support.
+          </p>
+
+          <div class="small text-secondary">
+            <div class="fw-semibold text-dark mb-1">Certifications</div>
+            <ul class="mb-0">
+              <li>CompTIA A+</li>
+              <li>Microsoft: AZ-900, AI-900, DP-900, SC-900</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-4 border bg-light hover-lift mt-3">
+          <h5 class="fw-semibold mb-2">What I’m not</h5>
+          <p class="text-secondary mb-0">
+            I’m not a computer shop or a managed service provider (MSP). I focus exclusively on residential support, not business IT. 
+          </p>
+          <p class="text-secondary mb-0">I also won’t recommend hardware, software, or services you don’t actually need, and if something is better handled by another provider, I’ll tell you directly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

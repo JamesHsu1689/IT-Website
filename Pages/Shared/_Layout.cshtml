@@ -30,13 +30,14 @@
             <div class="collapse navbar-collapse" id="nav">
                 <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
                     <li class="nav-item"><a class="nav-link" asp-page="/Index">Home</a></li>
-                <li class="nav-item"><a class="nav-link" asp-page="/Services">Services</a></li>                
-                <li class="nav-item"><a class="nav-link" asp-page="/Contact">Contact</a></li>
-                <li class="nav-item ms-lg-2">
-                    <a class="btn btn-primary btn-sm" asp-page="/Contact">
-                    Request help <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
-                </li>
+                    <li class="nav-item"><a class="nav-link" asp-page="/About">About</a></li> 
+                    <li class="nav-item"><a class="nav-link" asp-page="/Services">Services</a></li>                
+                    <li class="nav-item"><a class="nav-link" asp-page="/Contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-primary btn-sm" asp-page="/Contact">
+                        Request help <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
             </div>
@@ -54,11 +55,14 @@
             <div class="col-md-6">
                 <div class="fw-semibold text-white">Kairos Technologies</div>
                 <div class="small">Reliable IT support • Remote & On-site</div>
+                <div class="small text-white mt-1">
+                    Built and deployed by James using ASP.NET Core and Azure.
+                </div>
             </div>
             <div class="col-md-6 text-md-end small">
-                <a class="text-white-50 text-decoration-underline me-3" asp-page="/Services">Services</a>
+                @* <a class="text-white-50 text-decoration-underline me-3" asp-page="/Services">Services</a> *@
                 @* <a class="text-white-50 me-3" asp-page="/About">About</a> *@
-                <a class="text-white-50 text-decoration-underline" asp-page="/Contact">Contact</a>
+                @* <a class="text-white-50 text-decoration-underline" asp-page="/Contact">Contact</a> *@
                 <a class="text-white-50 text-decoration-underline ms-3" asp-page="/Privacy">Privacy Policy</a>
                 <a class="text-white-50 text-decoration-underline ms-3" asp-page="/Terms">Terms of Service</a>
                 <div class="mt-2">© @DateTime.UtcNow.Year Kairos Technologies</div>
