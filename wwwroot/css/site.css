@@ -72,11 +72,18 @@ body {
 .icon-badge {
   width: 44px;
   height: 44px;
-  display: inline-flex;
+  min-width: 44px;     /* prevents width shrink in flex rows */
+  display: flex;       /* fine here (works the same visually) */
   align-items: center;
   justify-content: center;
   border-radius: 12px;
   background: rgba(13,110,253,.1);
+  flex-shrink: 0;      /* prevents squishing */
+}
+
+/* keep icon sizing consistent */
+.icon-badge i {
+  line-height: 1;      /* avoids vertical weirdness on some icons */
 }
 
 /* Subtle hover lift */
