@@ -6,6 +6,36 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Kairos Technologies</title>
+
+
+    <!-- Open Graph Protocol -->
+    @using Microsoft.AspNetCore.Http.Extensions
+    @{
+        var siteBase = "https://www.kairostech.ca"; // your canonical host
+        var path = Context.Request.Path.Value ?? "/";
+        var canonicalUrl = siteBase + path;
+        var ogImageUrl = siteBase + "/images/og-cover.jpg";
+    }
+    <meta name="description" content="Independent residential IT support in Calgary. PC troubleshooting, Wi-Fi/networking, backups, security basics, and complete system restores — remote or in-home." />
+    <link rel="canonical" href="@canonicalUrl" />
+
+    <!-- Open Graph (LinkedIn/Facebook) -->
+    <meta property="og:title" content="Kairos Technologies — Residential IT Support in Calgary" />
+    <meta property="og:description" content="Personal tech support for individuals and families. Remote & in-home help anywhere in Calgary." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@canonicalUrl" />
+    <meta property="og:image" content="@ogImageUrl" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kairos Technologies — Residential IT Support in Calgary" />
+    <meta name="twitter:description" content="PC troubleshooting, Wi-Fi/networking, backups, security basics, and complete system restores." />
+    <meta name="twitter:image" content="@ogImageUrl" />
+    <meta name="twitter:url" content="@canonicalUrl" />
+
+
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
