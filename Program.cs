@@ -79,11 +79,17 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseRateLimiter();        // IMPORTANT: before MapRazorPages
+// Custom status code page that passes the code as a query parameter (e.g. /Status?code=404)
+app.UseStatusCodePagesWithReExecute("/Status", "?code={0}"); 
+
+// IMPORTANT: before MapRazorPages so it applies to all endpoints, including static assets and the status code page
+app.UseRateLimiter();        
+
 
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
 app.MapRazorPages()
    .WithStaticAssets();
 

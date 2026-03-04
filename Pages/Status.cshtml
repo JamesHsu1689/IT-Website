@@ -1,0 +1,39 @@
+﻿@page
+@model ITWebsite.Pages.StatusModel
+@{
+    ViewData["Title"] = "Request limit";
+}
+
+<section class="py-5">
+  <div class="container" style="max-width: 760px;">
+    <h1 class="fw-bold section-title mb-3">Please try again in a moment</h1>
+
+    @if (Model.Code == 429)
+    {
+      <p class="text-secondary mb-3">
+        You’ve made a lot of requests in a short time, so this page is temporarily rate-limited.
+        Please wait a few seconds and refresh.
+      </p>
+
+      <div class="p-3 rounded-4 border bg-light">
+        <div class="small text-secondary mb-2">Tip:</div>
+        <ul class="mb-0 text-secondary">
+          <li>Wait ~10–30 seconds, then try again.</li>
+          <li>If you’re testing, avoid rapid refreshes.</li>
+        </ul>
+      </div>
+
+      <div class="mt-4 d-flex flex-wrap gap-2">
+        <a class="btn btn-primary" href="/Contact">Back to Contact</a>
+        <a class="btn btn-outline-primary" href="/">Go to Home</a>
+      </div>
+    }
+    else
+    {
+      <p class="text-secondary mb-3">
+        Something went wrong (Error @Model.Code).
+      </p>
+      <a class="btn btn-primary" href="/">Go to Home</a>
+    }
+  </div>
+</section>

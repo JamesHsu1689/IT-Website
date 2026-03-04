@@ -3,11 +3,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MP6BQWCB0B"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MP6BQWCB0B', {
+        'send_page_view': true
+    });
+    </script>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Kairos Technologies</title>
 
-    <link rel="icon" type="image/png" href="~/favicon.png" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" asp-append-version="true" />
 
 
     <!-- Open Graph Protocol -->
@@ -64,7 +78,7 @@
                     <li class="nav-item"><a class="nav-link" asp-page="/Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link" asp-page="/About">About</a></li> 
                     <li class="nav-item"><a class="nav-link" asp-page="/Services">Services</a></li>                
-                    <li class="nav-item"><a class="nav-link" asp-page="/Contact">Contact</a></li>
+                    @* <li class="nav-item"><a class="nav-link" asp-page="/Contact">Contact</a></li> *@
                     <li class="nav-item ms-lg-2">
                         <a class="btn btn-primary btn-sm" asp-page="/Contact">
                         Request help <i class="bi bi-arrow-right ms-1"></i>
@@ -83,23 +97,45 @@
 
     <footer class="site-footer bg-dark text-white-50 py-4 mt-auto border-top border-secondary">
         <div class="container">
-            <div class="row g-3 align-items-center">
-            <div class="col-md-6">
-                <div class="fw-semibold text-white">Kairos Technologies</div>
-                <div class="small">Reliable IT support • Remote & On-site</div>
-                <div class="small text-white mt-1">
-                    Built and deployed by James using ASP.NET Core and Azure.
+
+            <!-- Row 1 : Business info -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="fw-semibold text-white">Kairos Technologies</div>
+                    <div class="small">Reliable IT support • Remote & On-site</div>
+
+                    <div class="small mt-2">
+                        <a class="text-white-50 text-decoration-underline"
+                        href="mailto:support@kairostech.ca">
+                            support@kairostech.ca
+                        </a>
+                        <span class="mx-2">•</span>
+                        Calgary, AB
+                    </div>
+                </div>
+
+                <div class="col-md-6 text-md-end">
+                    <div class="small text-white">
+                        Built and deployed by James using ASP.NET Core and Azure.
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6 text-md-end small">
-                @* <a class="text-white-50 text-decoration-underline me-3" asp-page="/Services">Services</a> *@
-                @* <a class="text-white-50 me-3" asp-page="/About">About</a> *@
-                @* <a class="text-white-50 text-decoration-underline" asp-page="/Contact">Contact</a> *@
-                <a class="text-white-50 text-decoration-underline ms-3" asp-page="/Privacy">Privacy Policy</a>
-                <a class="text-white-50 text-decoration-underline ms-3" asp-page="/Terms">Terms of Service</a>
-                <div class="mt-2">© @DateTime.UtcNow.Year Kairos Technologies</div>
+
+            <!-- Row 2 : Legal -->
+            <div class="row pt-3 border-top border-secondary small">
+                <div class="col-md-6">
+                    © @DateTime.UtcNow.Year Kairos Technologies
+                </div>
+
+                <div class="col-md-6 text-md-end">
+                    <a class="text-white-50 text-decoration-underline me-3"
+                    asp-page="/Privacy">Privacy Policy</a>
+
+                    <a class="text-white-50 text-decoration-underline"
+                    asp-page="/Terms">Terms of Service</a>
+                </div>
             </div>
-            </div>
+
         </div>
     </footer>
 
